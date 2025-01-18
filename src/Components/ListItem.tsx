@@ -2,17 +2,38 @@ interface Props{
     item: {
         name: string;
         completed: boolean;
-    }
+        id: number;
+    };
+    onClick: (id: number) => void;
+    onDelete: (id: number) => void;
 }
 
-function ListItem({item}: Props) {
+import Checkbox from "./Checkbox";
+import Button from "./Button";
+import TrashIcon from "./TrashIcon";
+import React from "react";
+
+function ListItem({item, onClick, onDelete}: Props) {
+
+    const handleClick = () => {
+        onClick(item.id)
+    }
+
+    const handleDelete = (e: React.MouseEvent) => {
+        e.stopPropagation()
+        onDelete(item.id)
+    }
+
     return <>
-        <div className="grid grid-cols-2 justify-between border-solid border-2 border-gray-300 p-2">
-            <div className="">
+        <div onClick={handleClick} className={`grid grid-cols-2 justify-between border-solid border-2  p-2 ${item.completed ? 'border-green-300 bg-green-100' : 'border-gray-300'}`} >
+            <div className=" flex" >
+                <Checkbox checked={item.completed} onChange={() => null} />
                 { item.name }
             </div>
             <div>
-                { item.completed }
+                <Button color="red" icon={<TrashIcon/>} onClick={handleDelete}>
+                   
+                </Button>
             </div>
         </div>
     </>;
