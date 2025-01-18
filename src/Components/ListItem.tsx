@@ -31,7 +31,7 @@ function ListItem({item, onClick, onDelete}: Props) {
                 { item.name }
             </div>
             <div>
-                <Button color="red" icon={<TrashIcon/>} onClick={handleDelete}>
+                <Button color="danger" icon={<TrashIcon/>} onClick={handleDelete}>
                    
                 </Button>
             </div>

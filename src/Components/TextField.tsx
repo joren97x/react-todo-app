@@ -9,6 +9,10 @@ function TextField({ handleAddTodo }: Props) {
 
     const [newTodo, setNewTodo] = useState<string>("")
     const addTodo = () => {
+        if(newTodo.length === 0) {
+            alert("Invalid input")
+            return
+        }
         handleAddTodo(newTodo)
         setNewTodo("")
     }
